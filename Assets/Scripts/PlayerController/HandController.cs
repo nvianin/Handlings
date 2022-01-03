@@ -5,7 +5,6 @@ using UnityEngine;
 public class HandController : MonoBehaviour
 {
     public bool Retracted = true;
-
     public float cameraSpeed = 50;
     public GameObject cameraPivot;
     public GameObject playerModel;
