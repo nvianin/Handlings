@@ -42,10 +42,17 @@ public class FingerWalk : MonoBehaviour
             }
             Debug.DrawRay(finger_aim.transform.position, aim_offset + (handController.direction.normalized * max_distance * length_modifier));
         }
-
-        if (Vector3.Distance(finger_ik.transform.position, finger_ik_pos) > .05f)
+        float fingerDist = Vector3.Distance(finger_ik.transform.position, finger_ik_pos);
+        if (fingerDist > .05f)
         {
-            finger_ik.transform.position = Vector3.Lerp(finger_ik.transform.position, finger_ik_pos, lerp_speed);
+            if (fingerDist > .5f)
+            {
+                finger_ik.transform.position = finger_ik_pos;
+            }
+            else
+            {
+                finger_ik.transform.position = Vector3.Lerp(finger_ik.transform.position, finger_ik_pos, lerp_speed);
+            }
         }
     }
 }

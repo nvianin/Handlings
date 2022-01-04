@@ -43,11 +43,11 @@ public class CameraBoom_RayCast : MonoBehaviour
         transform.localPosition = newPos;
 
         Vector3 direction = transform.position - transform.parent.position;
-        direction.y -= .3f;
+        /* direction.y -= .3f; */
         RaycastHit hit;
 
         /* Debug.DrawRay(transform.parent.position, direction, Color.red, 1); */
-        if (Physics.Raycast(transform.parent.position, direction, out hit, 10, ~LayerMask.NameToLayer("Player")))
+        if (Physics.Raycast(transform.parent.position, direction, out hit, currentDist, ~LayerMask.NameToLayer("Player")))
         {
             /* Debug.DrawRay(hit.point, Vector3.up, Color.yellow, 10); */
             targetDistance = Mathf.Clamp(Vector3.Distance(hit.point, transform.parent.position) - .05f, minDist, desiredDistance);
@@ -57,36 +57,4 @@ public class CameraBoom_RayCast : MonoBehaviour
         desiredDistance = Mathf.Clamp(desiredDistance + Input.GetAxis("Mouse ScrollWheel"), minDist, maxDist);
     }
 
-    /* void OnCollisionStay(Collision collision)
-    {
-        print(collision);
-        // Debug-draw all contact points and normals
-        foreach (ContactPoint contact in collision.contacts)
-        {
-            Debug.DrawRay(contact.point, contact.normal, Color.white, 10000);
-        }
-
-        float cameraToOrbit = Vector3.Distance(transform.position, transform.parent.position);
-        float contactToOrbit = Vector3.Distance(collision.contacts[0].point, transform.parent.position);
-
-        Vector3 newPos = transform.position;
-        if (cameraToOrbit > contactToOrbit)
-        {
-            targetDistance = Mathf.Clamp(targetDistance + .1f * speed, minDist, maxDist);
-        }
-        else
-        {
-            targetDistance = Mathf.Clamp(targetDistance - .1f * speed, minDist, maxDist);
-        }
-
-    }
-
-    void OnCollisionEnter()
-    {
-        collisionCount++;
-    }
-    void OnCollisionExit()
-    {
-        collisionCount--;
-    } */
 }

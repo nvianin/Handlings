@@ -8,6 +8,7 @@ public class HandController : MonoBehaviour
     public float cameraSpeed = 50;
     public GameObject cameraPivot;
     public GameObject playerModel;
+    public Rigidbody rigidbody;
     public GameObject ArmTarget;
     private Vector3 ArmTargetOrigin;
     public float ArmBounce;
@@ -22,15 +23,20 @@ public class HandController : MonoBehaviour
     public GameObject retraction_bone_1;
     public GameObject retraction_bone_2;
     public float retraction_scale = 5;
-    public bool cursorLock = false;
+    public bool cursorLock = true;
     public Vector3 direction;
     public List<Vector3> prevPos;
     private int prevPosCount = 20;
     public GameObject[] fingerJoints = new GameObject[5];
+    private Quaternion original_rot;
     void Start()
     {
         prevPos = new List<Vector3>();
         ArmTargetOrigin = ArmTarget.transform.position;
+        original_rot = playerModel.transform.rotation;
+
+        /* Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None; */
+        Cursor.lockState = CursorLockMode.Locked;
     }
 
     void FixedUpdate()
@@ -85,8 +91,9 @@ public class HandController : MonoBehaviour
 
         direction *= speed;
 
-
-        playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, playerModel.transform.position + direction, Time.deltaTime * lerpSpeed);
+        /* playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, playerModel.transform.position + direction, Time.deltaTime * lerpSpeed); */
+        /* rigidbody.AddForce(direction * lerpSpeed, ForceMode.Force); */
+        rigidbody.MovePosition(rigidbody.position + direction * lerpSpeed);
 
         // PLAYERMODEL ROTATION
 
@@ -97,20 +104,24 @@ public class HandController : MonoBehaviour
             medDir += pos;
         }
         medDir /= prevPos.Count;
-        newRot = Quaternion.Slerp(newRot, Quaternion.LookRotation(playerModel.transform.position - medDir, Vector3.up), Time.deltaTime * rotationSpeed);
-
+        print((playerModel.transform.position - medDir).magnitude);
+        if ((playerModel.transform.position - medDir).magnitude > .01f)
+        {
+            newRot = Quaternion.Slerp(newRot, Quaternion.LookRotation(playerModel.transform.position - medDir, Vector3.up), Time.deltaTime * rotationSpeed);
+            playerModel.transform.rotation = newRot;
+        }
 
         // Hand Palm IK
 
-        Vector3 newPos = ArmTargetOrigin;
+        Vector3 newPos = ArmTarget.transform.position;
 
-        ArmBounce += Mathf.Sin(Time.fixedTime * bounceSpeed * (direction.magnitude + 1)) * (direction.magnitude + .05f) * bounceHeight + bounceOffset;
-        ArmBounce = Mathf.Lerp(ArmBounce, 0, Time.deltaTime * 20);
-        newPos.y += ArmBounce;
-        newPos.x = ArmTarget.transform.position.x;
-        newPos.z = ArmTarget.transform.position.z;
+        ArmBounce = Mathf.Sin(Time.fixedTime * bounceSpeed * (direction.magnitude + 1)) * (direction.magnitude + .05f) * bounceHeight + bounceOffset;
+        /* ArmBounce = Mathf.Lerp(ArmBounce, 0, Time.deltaTime * 20); */
+        newPos.y = ArmTargetOrigin.y + ArmBounce;
+        /* newPos.x = ArmTarget.transform.position.x;
+        newPos.z = ArmTarget.transform.position.z; */
 
-        ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, newPos, Time.deltaTime * 10f);
+        /* ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, newPos, Time.deltaTime * 10f); */
 
         /* Vector3 palmRotation = Vector3.zero;
         foreach (GameObject joint in fingerJoints)
@@ -128,18 +139,16 @@ public class HandController : MonoBehaviour
             prevPos.RemoveAt(0);
         }
         prevPos.Add(playerModel.transform.position);
-
-
     }
 
     void Update()
     {
         // Lock cursor to window
 
-        if (Input.GetKeyUp("f1"))
+        /* if (Input.GetKeyUp("f1"))
         {
             cursorLock = !cursorLock;
             Cursor.lockState = cursorLock ? CursorLockMode.Locked : CursorLockMode.None;
-        }
+        } */
     }
 }

@@ -36,39 +36,42 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <Analyzer Include="D:\Projects\_ecal\ecal_Atelier\Handlings\Handlings\Assets\Libraries\BCrypt.Net-Next.dll" />
+  </ItemGroup>
+  <ItemGroup>
+     <Compile Include="Assets\Scripts\Net\Server\EmulatedPlayerBehaviour.cs" />
+     <Compile Include="Assets\Scripts\Net\LoginController.cs" />
+     <Compile Include="Assets\Scripts\Net\Server\TCPListener.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom_RayCast.cs" />
      <Compile Include="Assets\SampleSceneAssets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Net\RedisClient.cs" />
-     <Compile Include="Assets\Scripts\Utils\CustomThreadHandler.cs" />
-     <Compile Include="Assets\SampleSceneAssets\Scripts\LookWithMouse.cs" />
-     <Compile Include="Assets\Scripts\Net\HazelTCPClient.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\PlayerController.cs" />
-     <Compile Include="Assets\Scripts\Animation\CharacterAnimationScript.cs" />
-     <Compile Include="Assets\Scripts\Net\MongoDBClient.cs" />
-     <Compile Include="Assets\Scripts\World\WorldManager.cs" />
-     <Compile Include="Assets\Scripts\Net\Server\EmulatedPlayerBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Animation\FingerWalk.cs" />
-     <Compile Include="Assets\Scripts\Net\Client\TCPClient.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\ArmController.cs" />
      <Compile Include="Assets\Scripts\Net\Client\UDPClient.cs" />
-     <Compile Include="Assets\Scripts\Net\Server\Introspector.cs" />
-     <Compile Include="Assets\Scripts\World\WorldChunkBehaviour.cs" />
-     <Compile Include="Assets\Scripts\Net\NetArgParser.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraFollow.cs" />
-     <Compile Include="Assets\Scripts\Net\Server\UDPServer.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\NoiseController.cs" />
-     <Compile Include="Assets\Scripts\Net\Server\TCPListener.cs" />
-     <Compile Include="Assets\Scripts\Net\LoginController.cs" />
-     <Compile Include="Assets\Scripts\TrainTest.cs" />
      <Compile Include="Assets\Scripts\PlayerController\HandController.cs" />
-     <Compile Include="Assets\Scripts\Net\Client\ClientController.cs" />
-     <Compile Include="Assets\Scripts\Net\Server\ServerController.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom.cs" />
-     <Compile Include="Assets\Scripts\UI\TitleAnimator.cs" />
-     <Compile Include="Assets\Scripts\Net\CustomTCP.cs" />
      <Compile Include="Assets\Scripts\Animation\LightPulser.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom_RayCast.cs" />
      <Compile Include="Assets\SampleSceneAssets\Scripts\SimpleCameraController.cs" />
+     <Compile Include="Assets\Scripts\Animation\CharacterAnimationScript.cs" />
+     <Compile Include="Assets\Scripts\Animation\FingerWalk.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraFollow.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom.cs" />
+     <Compile Include="Assets\Scripts\Net\NetArgParser.cs" />
+     <Compile Include="Assets\Scripts\Net\Server\Introspector.cs" />
+     <Compile Include="Assets\Scripts\Utils\CustomThreadHandler.cs" />
+     <Compile Include="Assets\Scripts\Net\Server\UDPServer.cs" />
+     <Compile Include="Assets\Scripts\TrainTest.cs" />
+     <Compile Include="Assets\Scripts\Net\CustomTCP.cs" />
+     <Compile Include="Assets\Scripts\Net\MongoDBClient.cs" />
+     <Compile Include="Assets\Scripts\Net\Server\ServerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\PlayerController.cs" />
+     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+     <Compile Include="Assets\Scripts\World\WorldManager.cs" />
+     <Compile Include="Assets\SampleSceneAssets\Scripts\LookWithMouse.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\ArmController.cs" />
+     <Compile Include="Assets\Scripts\Net\HazelTCPClient.cs" />
+     <Compile Include="Assets\Scripts\World\WorldChunkBehaviour.cs" />
+     <Compile Include="Assets\Scripts\UI\TitleAnimator.cs" />
+     <Compile Include="Assets\Scripts\Net\Client\TCPClient.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\NoiseController.cs" />
+     <Compile Include="Assets\Scripts\Net\Client\ClientController.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Tools\Unity\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
@@ -290,6 +293,9 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>D:\Tools\Unity\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Burst.Unsafe">
+        <HintPath>D:\Projects\_ecal\ecal_Atelier\Handlings\Handlings\Library\PackageCache\com.unity.burst@1.3.4\Unity.Burst.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
         <HintPath>D:\Projects\_ecal\ecal_Atelier\Handlings\Handlings\Library\PackageCache\com.unity.nuget.newtonsoft-json@2.0.0\Runtime\Newtonsoft.Json.dll</HintPath>
@@ -647,10 +653,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
-      <Project>{7a091e79-b50b-cd3a-7b95-74df8bec19ac}</Project>
-      <Name>Unity.ShaderGraph.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{6d8947f7-5589-d97b-f78e-6a325cf88601}</Project>
       <Name>Unity.VSCode.Editor</Name>
@@ -658,10 +660,6 @@
     <ProjectReference Include="Unity.RenderPipelines.Universal.Shaders.csproj">
       <Project>{a1886ce8-4929-4833-bb3f-b4ce305ec9d1}</Project>
       <Name>Unity.RenderPipelines.Universal.Shaders</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
-      <Project>{0deeb4ba-aef9-56f0-f0e1-5ca9968286a9}</Project>
-      <Name>Unity.RenderPipelines.Universal.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Universal.Runtime.csproj">
       <Project>{a333210a-100b-dd8f-ba9d-71927376a8bf}</Project>
@@ -675,29 +673,17 @@
       <Project>{66ec059f-1267-ee47-aef0-ecac1eede074}</Project>
       <Name>Unity.VisualStudio.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
-      <Project>{4155815b-41a5-25cf-0090-15c946d49dda}</Project>
-      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.Editor.csproj">
-      <Project>{01e9eefa-9d2d-d568-2b00-0c3c207bd4a6}</Project>
-      <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.csproj">
       <Project>{0ff139d2-640d-4e19-6ad2-bab51842e94b}</Project>
       <Name>Unity.Timeline</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
-      <Project>{cbbb5044-667a-5a3d-d963-6c2b14e553ca}</Project>
-      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.csproj">
       <Project>{d49d1e9d-3320-6604-d4ca-2ac45528c310}</Project>
       <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
-      <Project>{33f116ce-be6f-dc0f-6f85-df1a29cd2c67}</Project>
-      <Name>Unity.Mathematics.Editor</Name>
+    <ProjectReference Include="Unity.Burst.Editor.csproj">
+      <Project>{9b31bfd5-8b89-7a11-72f7-193500a5affa}</Project>
+      <Name>Unity.Burst.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Searcher.Editor.csproj">
       <Project>{1f24b44f-a0e0-25d3-be08-5c4761cd7c38}</Project>
@@ -727,13 +713,49 @@
       <Project>{a16709b8-c762-4460-8b29-a2bfc560acb1}</Project>
       <Name>UnityEngine.UI</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
-      <Project>{016e9b73-19c4-c9f9-bddc-7a766b07fcf0}</Project>
-      <Name>Unity.RenderPipelines.Core.Editor</Name>
+    <ProjectReference Include="Unity.Animation.Rigging.csproj">
+      <Project>{b1d342e2-506e-2d22-2eb6-9ec3f8c1a1a2}</Project>
+      <Name>Unity.Animation.Rigging</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.Mathematics.csproj">
       <Project>{eaa2a38f-65af-8145-2429-2b5997095dd7}</Project>
       <Name>Unity.Mathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.ShaderGraph.Editor.csproj">
+      <Project>{7a091e79-b50b-cd3a-7b95-74df8bec19ac}</Project>
+      <Name>Unity.ShaderGraph.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Burst.csproj">
+      <Project>{72b402ab-bc07-4323-2dc0-ec76ee2e0803}</Project>
+      <Name>Unity.Burst</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Universal.Editor.csproj">
+      <Project>{0deeb4ba-aef9-56f0-f0e1-5ca9968286a9}</Project>
+      <Name>Unity.RenderPipelines.Universal.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipeline.Universal.ShaderLibrary.csproj">
+      <Project>{4155815b-41a5-25cf-0090-15c946d49dda}</Project>
+      <Name>Unity.RenderPipeline.Universal.ShaderLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Timeline.Editor.csproj">
+      <Project>{01e9eefa-9d2d-d568-2b00-0c3c207bd4a6}</Project>
+      <Name>Unity.Timeline.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.csproj">
+      <Project>{cbbb5044-667a-5a3d-d963-6c2b14e553ca}</Project>
+      <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Mathematics.Editor.csproj">
+      <Project>{33f116ce-be6f-dc0f-6f85-df1a29cd2c67}</Project>
+      <Name>Unity.Mathematics.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Animation.Rigging.Editor.csproj">
+      <Project>{62d73082-c26a-7234-ffb8-b10ca0faccc2}</Project>
+      <Name>Unity.Animation.Rigging.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
+      <Project>{016e9b73-19c4-c9f9-bddc-7a766b07fcf0}</Project>
+      <Name>Unity.RenderPipelines.Core.Editor</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
