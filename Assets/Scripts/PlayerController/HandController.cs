@@ -117,11 +117,11 @@ public class HandController : MonoBehaviour
 
         ArmBounce = Mathf.Sin(Time.fixedTime * bounceSpeed * (direction.magnitude + 1)) * (direction.magnitude + .05f) * bounceHeight + bounceOffset;
         /* ArmBounce = Mathf.Lerp(ArmBounce, 0, Time.deltaTime * 20); */
-        newPos.y = ArmTargetOrigin.y + ArmBounce;
+        newPos.y += ArmBounce;
         /* newPos.x = ArmTarget.transform.position.x;
         newPos.z = ArmTarget.transform.position.z; */
 
-        /* ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, newPos, Time.deltaTime * 10f); */
+        ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, newPos, Time.deltaTime * 10f);
 
         /* Vector3 palmRotation = Vector3.zero;
         foreach (GameObject joint in fingerJoints)
