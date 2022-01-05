@@ -362,7 +362,7 @@ MonoBehaviour:
   handController: {fileID: 9187481276318293227}
   max_distance: 0.12
   lerp_speed: 0.35
-  length_modifier: 1
+  length_modifier: 2
   finger_root: {fileID: 8818720306272541383}
   finger_ik: {fileID: 9187481276095328285}
   finger_aim: {fileID: 9187481276136324169}
@@ -587,7 +587,7 @@ MonoBehaviour:
   handController: {fileID: 9187481276318293227}
   max_distance: 0.12
   lerp_speed: 0.35
-  length_modifier: 1
+  length_modifier: 2
   finger_root: {fileID: 6814689358259779735}
   finger_ik: {fileID: 9187481277928301359}
   finger_aim: {fileID: 9187481276024280540}
@@ -813,7 +813,7 @@ MonoBehaviour:
   handController: {fileID: 9187481276318293227}
   max_distance: 0.12
   lerp_speed: 0.35
-  length_modifier: 1
+  length_modifier: 2
   finger_root: {fileID: 7759450742660863959}
   finger_ik: {fileID: 9187481276605309606}
   finger_aim: {fileID: 9187481275948288961}
@@ -869,7 +869,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9187481277228213599}
   m_LocalRotation: {x: -0.3992915, y: 0.0014186424, z: -0.2745518, w: -0.87474895}
-  m_LocalPosition: {x: 0.056, y: 0.727, z: 0.183}
+  m_LocalPosition: {x: 0.068, y: 0.736, z: 0.183}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 8649942596376300796}
@@ -922,7 +922,7 @@ MonoBehaviour:
   handController: {fileID: 9187481276318293227}
   max_distance: 0.12
   lerp_speed: 0.35
-  length_modifier: 1
+  length_modifier: 2
   finger_root: {fileID: 5782141501953554458}
   finger_ik: {fileID: 9187481277155034037}
   finger_aim: {fileID: 9187481275979996188}
@@ -1160,7 +1160,7 @@ MonoBehaviour:
   handController: {fileID: 9187481276318293227}
   max_distance: 0.12
   lerp_speed: 0.35
-  length_modifier: 1
+  length_modifier: 2
   finger_root: {fileID: 5044751628609944642}
   finger_ik: {fileID: 9187481276784862096}
   finger_aim: {fileID: 9187481276305985631}
