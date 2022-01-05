@@ -28,10 +28,10 @@ public class FingerWalk : MonoBehaviour
             /* print("finger out of bounds"); */
             Vector3 newTargetPos = new Vector3();
             RaycastHit hit;
-            if (Physics.Raycast(finger_aim.transform.position, aim_offset + (handController.direction.normalized * max_distance * 50 * length_modifier), out hit))
+            if (Physics.Raycast(finger_aim.transform.position, aim_offset + (handController.direction.normalized * max_distance * 50 * length_modifier * handController.rigidbody.velocity.sqrMagnitude), out hit))
             {
                 //print("FUCK");
-                Debug.DrawRay(hit.point, Vector3.up * .1f);
+                Debug.DrawRay(hit.point, Vector3.up * .1f, Color.green, 1);
                 newTargetPos = hit.point;
                 Vector3 rand = Random.onUnitSphere;
                 rand.y = 0;
@@ -40,7 +40,7 @@ public class FingerWalk : MonoBehaviour
                 // finger_target.transform.position = newTargetPos;
                 finger_ik_pos = newTargetPos;
             }
-            Debug.DrawRay(finger_aim.transform.position, aim_offset + (handController.direction.normalized * max_distance * length_modifier));
+            Debug.DrawRay(finger_aim.transform.position, aim_offset + (handController.direction.normalized * max_distance * 50 * length_modifier * handController.rigidbody.velocity.sqrMagnitude), Color.yellow, .5f);
         }
         float fingerDist = Vector3.Distance(finger_ik.transform.position, finger_ik_pos);
         if (fingerDist > .05f)
