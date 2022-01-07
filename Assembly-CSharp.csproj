@@ -45,6 +45,7 @@
      <Compile Include="Assets\Scripts\Net\Client\UDPClient.cs" />
      <Compile Include="Assets\Scripts\PlayerController\HandController.cs" />
      <Compile Include="Assets\Scripts\Animation\LightPulser.cs" />
+     <Compile Include="Assets\Settings\CustomRenderPassFeature.cs" />
      <Compile Include="Assets\SampleSceneAssets\Scripts\SimpleCameraController.cs" />
      <Compile Include="Assets\Scripts\Animation\CharacterAnimationScript.cs" />
      <Compile Include="Assets\Scripts\Animation\FingerWalk.cs" />
@@ -58,6 +59,7 @@
      <Compile Include="Assets\Scripts\Net\CustomTCP.cs" />
      <Compile Include="Assets\Scripts\Net\MongoDBClient.cs" />
      <Compile Include="Assets\Scripts\Net\Server\ServerController.cs" />
+     <Compile Include="Assets\Scripts\PlayerController\HandMasterController.cs" />
      <Compile Include="Assets\Scripts\PlayerController\PlayerController.cs" />
      <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
      <Compile Include="Assets\Scripts\World\WorldManager.cs" />
@@ -69,8 +71,7 @@
      <Compile Include="Assets\Scripts\Net\Client\TCPClient.cs" />
      <Compile Include="Assets\Scripts\PlayerController\NoiseController.cs" />
      <Compile Include="Assets\Scripts\Net\Client\ClientController.cs" />
-     <Compile Include="Assets\Settings\CustomRenderPassFeature.cs" />
-     <Compile Include="Assets\Scripts\PlayerController\HandMasterController.cs" />
+     <Compile Include="Assets\Scripts\Utils\CustomTag.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Tools\Unity\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>

@@ -19,6 +19,7 @@ public class HandMasterController : MonoBehaviour
     public float horizontalSpeed = 10;
     public float verticalSpeed = 10;
     public float grab_factor = 0;
+    public float grab_speed = .02f;
     void Start()
     {
         original_position = transform.position;
@@ -67,7 +68,12 @@ public class HandMasterController : MonoBehaviour
                 if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
                 {
                     /* ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, targetPos, Time.deltaTime * horizontalSpeed); */
-                    playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, targetPos, Time.deltaTime * horizontalSpeed);
+                    playerModel.transform.position =
+                    Vector3.Lerp(
+                        playerModel.transform.position,
+                         playerModel.transform.position + (targetPos - playerModel.transform.position).normalized,
+                          Time.deltaTime * horizontalSpeed
+                          );
                 }
                 else
                 {
@@ -82,19 +88,25 @@ public class HandMasterController : MonoBehaviour
                 {
                     if (Vector3.Distance(ArmTarget.transform.position, Target.transform.position) > .05f)
                     {
-                        ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, Target.transform.position, Time.deltaTime * verticalSpeed);
+                        ArmTarget.transform.position =
+                        Vector3.Lerp(
+                            ArmTarget.transform.position,
+                             ArmTarget.transform.position + (Target.transform.position - ArmTarget.transform.position).normalized,
+                              Time.deltaTime * verticalSpeed
+                              );
                     }
                     else
                     {
                         int i = 0;
                         foreach (GameObject finger_target in finger_targets)
                         {
-                            finger_target.transform.position = Vector3.Lerp(finger_offsets[i], fingerCenter.transform.position, grab_factor);
+                            finger_target.transform.position =
+                            Vector3.Lerp(finger_offsets[i], fingerCenter.transform.position, grab_factor);
                             i++;
                         }
                         if (grab_factor < .8f)
                         {
-                            grab_factor += .01f;
+                            grab_factor += grab_speed;
                         }
                         else
                         {
@@ -112,6 +124,16 @@ public class HandMasterController : MonoBehaviour
                 }
                 break;
             case "releasing":
+                if (grab_factor > 0)
+                {
+                    grab_factor -= grab_speed;
+                }
+                else
+                {
+                    Target.tag = "";
+                    state = "idle";
+                    Target = null;
+                }
                 break;
             case "travelling":
                 targetPos = playerModel.transform.position;
@@ -119,17 +141,28 @@ public class HandMasterController : MonoBehaviour
                 targetPos.z = targetPositionMarker.transform.position.z;
                 if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
                 {
-                    playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, targetPos, Time.deltaTime * horizontalSpeed);
+                    playerModel.transform.position =
+                    Vector3.Lerp(
+                        playerModel.transform.position,
+                         playerModel.transform.position + (targetPos - playerModel.transform.position).normalized,
+                          Time.deltaTime * horizontalSpeed
+                          );
+                    Target.transform.position = ArmTarget.transform.position;
                 }
                 else
                 {
                     if (Vector3.Distance(ArmTarget.transform.position, targetPositionMarker.transform.position) > .05f)
                     {
-
+                        ArmTarget.transform.position =
+                         Vector3.Lerp(
+                             ArmTarget.transform.position,
+                              ArmTarget.transform.position + (targetPositionMarker.transform.position - ArmTarget.transform.position).normalized,
+                               Time.deltaTime * verticalSpeed
+                               );
                     }
                     else
                     {
-
+                        state = "releasing";
                     }
                 }
                 break;
