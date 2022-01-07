@@ -4,30 +4,35 @@ using UnityEngine;
 
 public class HandMasterController : MonoBehaviour
 {
-    public bool Retracted = true;
     public float cameraSpeed = 50;
     public GameObject cameraPivot;
     public GameObject playerModel;
-    public Rigidbody rigidbody;
     public GameObject ArmTarget;
+    public GameObject targetPositionMarker;
     private Vector3 ArmTargetOrigin;
-    public float retraction_scale = 5;
-    public Vector3 direction;
-    public List<Vector3> prevPos;
-    private int prevPosCount = 20;
-    public GameObject[] fingerJoints = new GameObject[5];
-    private Quaternion original_rot;
+    public GameObject[] finger_targets = new GameObject[5];
+    public Vector3[] finger_offsets = new Vector3[5];
+    public GameObject fingerCenter;
+    public string state = "idle";
+    public GameObject Target = null;
+    private Vector3 original_position;
+    public float horizontalSpeed = 10;
+    public float verticalSpeed = 10;
+    public float grab_factor = 0;
     void Start()
     {
-        prevPos = new List<Vector3>();
+        original_position = transform.position;
         ArmTargetOrigin = ArmTarget.transform.position;
-        original_rot = playerModel.transform.rotation;
+        var i = 0;
+        foreach (GameObject finger in finger_targets)
+        {
+            finger_offsets[i] = finger.transform.position;
+            i++;
+        }
     }
 
     void FixedUpdate()
     {
-        if (Input.GetKeyUp(KeyCode.Space)) Retracted = !Retracted;
-
         // CAMERA ROTATION
 
         Vector3 rot = cameraPivot.transform.eulerAngles;
@@ -39,5 +44,95 @@ public class HandMasterController : MonoBehaviour
         rot.x = rot.x < -40 ? -40 : rot.x;
 
         cameraPivot.transform.eulerAngles = rot;
+
+        // STATE MACHINE
+
+        Vector3 targetPos = ArmTarget.transform.position;
+        switch (state)
+        {
+            case "idle":
+                var gobs = GameObject.FindGameObjectsWithTag("Grabbable");
+                if (gobs.Length > 0)
+                {
+                    print("got " + gobs.Length + " objects");
+                    state = "hunting";
+                    Target = gobs[0];
+                }
+                break;
+            case "hunting":
+                targetPos = playerModel.transform.position;
+                targetPos.x = Target.transform.position.x;
+                targetPos.z = Target.transform.position.z;
+
+                if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
+                {
+                    /* ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, targetPos, Time.deltaTime * horizontalSpeed); */
+                    playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, targetPos, Time.deltaTime * horizontalSpeed);
+                }
+                else
+                {
+                    state = "grabbing";
+                }
+                break;
+            case "grabbing":
+                targetPos = playerModel.transform.position;
+                targetPos.x = Target.transform.position.x;
+                targetPos.z = Target.transform.position.z;
+                if (Vector3.Distance(playerModel.transform.position, targetPos) <= .05f)
+                {
+                    if (Vector3.Distance(ArmTarget.transform.position, Target.transform.position) > .05f)
+                    {
+                        ArmTarget.transform.position = Vector3.Lerp(ArmTarget.transform.position, Target.transform.position, Time.deltaTime * verticalSpeed);
+                    }
+                    else
+                    {
+                        int i = 0;
+                        foreach (GameObject finger_target in finger_targets)
+                        {
+                            finger_target.transform.position = Vector3.Lerp(finger_offsets[i], fingerCenter.transform.position, grab_factor);
+                            i++;
+                        }
+                        if (grab_factor < .8f)
+                        {
+                            grab_factor += .01f;
+                        }
+                        else
+                        {
+                            state = "travelling";
+                        }
+                    }
+                }
+                else if (Target)
+                {
+                    state = "hunting";
+                }
+                else
+                {
+                    state = "idle";
+                }
+                break;
+            case "releasing":
+                break;
+            case "travelling":
+                targetPos = playerModel.transform.position;
+                targetPos.x = targetPositionMarker.transform.position.x;
+                targetPos.z = targetPositionMarker.transform.position.z;
+                if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
+                {
+                    playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, targetPos, Time.deltaTime * horizontalSpeed);
+                }
+                else
+                {
+                    if (Vector3.Distance(ArmTarget.transform.position, targetPositionMarker.transform.position) > .05f)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+                break;
+        }
     }
 }
