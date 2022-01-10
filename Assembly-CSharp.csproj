@@ -58,7 +58,7 @@
      <Compile Include="Assets\Scripts\Net\Server\UDPServer.cs" />
      <Compile Include="Assets\Scripts\TrainTest.cs" />
      <Compile Include="Assets\Scripts\Net\CustomTCP.cs" />
-     <Compile Include="Assets\Scripts\Entities\SpiralLock.cs" />
+     <Compile Include="Assets\Scripts\Entities\SpiralSlider.cs" />
      <Compile Include="Assets\Scripts\Net\MongoDBClient.cs" />
      <Compile Include="Assets\Scripts\Net\Server\ServerController.cs" />
      <Compile Include="Assets\Scripts\PlayerController\HandMasterController.cs" />

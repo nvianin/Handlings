@@ -15,6 +15,7 @@ public class HandMasterController : MonoBehaviour
     public GameObject fingerCenter;
     public string state = "idle";
     public GameObject Target = null;
+    private Vector3 TargetObjectOffset = Vector3.zero;
     private Vector3 original_position;
     public float horizontalSpeed = 10;
     public float verticalSpeed = 10;
@@ -22,6 +23,15 @@ public class HandMasterController : MonoBehaviour
     public float grab_speed = .02f;
     void Start()
     {
+        /* Vector3 med = Vector3.zero;
+        foreach (GameObject finger in finger_targets)
+        {
+            med += finger.transform.position;
+        }
+        med /= 5;
+        fingerCenter.transform.position = med; */
+
+
         original_position = transform.position;
         ArmTargetOrigin = ArmTarget.transform.position;
         setFingersOrigin();
@@ -32,7 +42,7 @@ public class HandMasterController : MonoBehaviour
         int i = 0;
         foreach (GameObject finger in finger_targets)
         {
-            finger_offsets[i] = finger.transform.position;
+            finger_offsets[i] = finger.transform.localPosition;
             i++;
         }
     }
@@ -82,7 +92,7 @@ public class HandMasterController : MonoBehaviour
                 }
                 else
                 {
-                    setFingersOrigin();
+                    /* setFingersOrigin(); */
                     state = "grabbing";
                 }
                 break;
@@ -90,8 +100,10 @@ public class HandMasterController : MonoBehaviour
                 targetPos = playerModel.transform.position;
                 targetPos.x = Target.transform.position.x;
                 targetPos.z = Target.transform.position.z;
+                // Check if still close enough to grab
                 if (Vector3.Distance(playerModel.transform.position, targetPos) <= .05f)
                 {
+                    // 
                     if (Vector3.Distance(ArmTarget.transform.position, Target.transform.position) > .05f)
                     {
                         ArmTarget.transform.position =
@@ -106,8 +118,8 @@ public class HandMasterController : MonoBehaviour
                         int i = 0;
                         foreach (GameObject finger_target in finger_targets)
                         {
-                            finger_target.transform.position =
-                            Vector3.Lerp(finger_offsets[i], fingerCenter.transform.position, grab_factor);
+                            finger_target.transform.localPosition =
+                            Vector3.Lerp(finger_offsets[i], fingerCenter.transform.localPosition, grab_factor);
                             i++;
                         }
                         if (grab_factor < .8f)
@@ -116,6 +128,7 @@ public class HandMasterController : MonoBehaviour
                         }
                         else
                         {
+                            TargetObjectOffset = Target.transform.position - ArmTarget.transform.position;
                             state = "travelling";
                         }
                     }
@@ -133,33 +146,34 @@ public class HandMasterController : MonoBehaviour
                 targetPos = playerModel.transform.position;
                 targetPos.x = targetPositionMarker.transform.position.x;
                 targetPos.z = targetPositionMarker.transform.position.z;
+
+                if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
+                {
+                    playerModel.transform.position =
+                    Vector3.Lerp(
+                        playerModel.transform.position,
+                         playerModel.transform.position + (targetPos - playerModel.transform.position).normalized,
+                          Time.deltaTime * horizontalSpeed
+                          );
+                }
                 if (Vector3.Distance(ArmTarget.transform.position, targetPositionMarker.transform.position) > .05f)
                 {
                     ArmTarget.transform.position =
-                     Vector3.Lerp(
-                         ArmTarget.transform.position,
-                          ArmTarget.transform.position + (targetPositionMarker.transform.position - ArmTarget.transform.position).normalized,
-                           Time.deltaTime * verticalSpeed
-                           );
+                    Vector3.Lerp(
+                        ArmTarget.transform.position,
+                            (ArmTarget.transform.position
+                            + (targetPositionMarker.transform.position   - ArmTarget.transform.position).normalized
+                            ),
+                          Time.deltaTime * verticalSpeed
+                          );
                 }
                 else
                 {
-                    if (Vector3.Distance(playerModel.transform.position, targetPos) > .05f)
-                    {
-                        playerModel.transform.position =
-                        Vector3.Lerp(
-                            playerModel.transform.position,
-                             playerModel.transform.position + (targetPos - playerModel.transform.position).normalized,
-                              Time.deltaTime * horizontalSpeed
-                              );
-                    }
-                    else
-                    {
-                        setFingersOrigin();
-                        state = "releasing";
-                    }
-                    Target.transform.position = ArmTarget.transform.position;
+                    /* setFingersOrigin(); */
+                    state = "releasing";
                 }
+
+                Target.transform.position = ArmTarget.transform.position + TargetObjectOffset;
                 break;
             case "releasing":
                 if (grab_factor > 0)
@@ -168,8 +182,8 @@ public class HandMasterController : MonoBehaviour
                     int i = 0;
                     foreach (GameObject finger_target in finger_targets)
                     {
-                        finger_target.transform.position =
-                        Vector3.Lerp(finger_offsets[i], fingerCenter.transform.position, grab_factor);
+                        finger_target.transform.localPosition =
+                        Vector3.Lerp(finger_offsets[i], fingerCenter.transform.localPosition, grab_factor);
                         i++;
                     }
                 }
