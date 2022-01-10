@@ -40,6 +40,7 @@
      <Compile Include="Assets\Scripts\Net\LoginController.cs" />
      <Compile Include="Assets\Scripts\Net\Server\TCPListener.cs" />
      <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom_RayCast.cs" />
+     <Compile Include="Assets\Scripts\Utils\CustomTag.cs" />
      <Compile Include="Assets\SampleSceneAssets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Net\RedisClient.cs" />
      <Compile Include="Assets\Scripts\Net\Client\UDPClient.cs" />
@@ -57,6 +58,7 @@
      <Compile Include="Assets\Scripts\Net\Server\UDPServer.cs" />
      <Compile Include="Assets\Scripts\TrainTest.cs" />
      <Compile Include="Assets\Scripts\Net\CustomTCP.cs" />
+     <Compile Include="Assets\Scripts\Entities\SpiralLock.cs" />
      <Compile Include="Assets\Scripts\Net\MongoDBClient.cs" />
      <Compile Include="Assets\Scripts\Net\Server\ServerController.cs" />
      <Compile Include="Assets\Scripts\PlayerController\HandMasterController.cs" />
@@ -71,7 +73,6 @@
      <Compile Include="Assets\Scripts\Net\Client\TCPClient.cs" />
      <Compile Include="Assets\Scripts\PlayerController\NoiseController.cs" />
      <Compile Include="Assets\Scripts\Net\Client\ClientController.cs" />
-     <Compile Include="Assets\Scripts\Utils\CustomTag.cs" />
     <Reference Include="UnityEngine">
         <HintPath>D:\Tools\Unity\2020.3.25f1\Editor\Data\Managed\UnityEngine\UnityEngine.dll</HintPath>
     </Reference>
