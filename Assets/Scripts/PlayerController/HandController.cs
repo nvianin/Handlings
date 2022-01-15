@@ -31,6 +31,7 @@ public class HandController : MonoBehaviour
     private Quaternion original_rot;
     void Start()
     {
+
         prevPos = new List<Vector3>();
         ArmTargetOrigin = ArmTarget.transform.position;
         original_rot = playerModel.transform.rotation;
@@ -88,8 +89,7 @@ public class HandController : MonoBehaviour
         direction += cameraPivot.transform.rotation * Vector3.forward * Input.GetAxis("Vertical");
         direction.y = 0;
         direction = direction.normalized;
-
-        direction *= speed;
+        direction *= Input.GetKey(KeyCode.LeftShift) ? speed * 3 : speed;
 
         /* playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, playerModel.transform.position + direction, Time.deltaTime * lerpSpeed); */
         /* rigidbody.AddForce(direction * lerpSpeed, ForceMode.Force); */
@@ -104,7 +104,7 @@ public class HandController : MonoBehaviour
             medDir += pos;
         }
         medDir /= prevPos.Count;
-        print((playerModel.transform.position - medDir).magnitude);
+        /* print((playerModel.transform.position - medDir).magnitude); */
         if ((playerModel.transform.position - medDir).magnitude > .01f)
         {
             newRot = Quaternion.Slerp(newRot, Quaternion.LookRotation(playerModel.transform.position - medDir, Vector3.up), Time.deltaTime * rotationSpeed);

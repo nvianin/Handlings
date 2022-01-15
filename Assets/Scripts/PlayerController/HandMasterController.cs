@@ -162,7 +162,7 @@ public class HandMasterController : MonoBehaviour
                     Vector3.Lerp(
                         ArmTarget.transform.position,
                             (ArmTarget.transform.position
-                            + (targetPositionMarker.transform.position   - ArmTarget.transform.position).normalized
+                            + (targetPositionMarker.transform.position - ArmTarget.transform.position).normalized
                             ),
                           Time.deltaTime * verticalSpeed
                           );
