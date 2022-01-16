@@ -29,6 +29,9 @@ public class HandController : MonoBehaviour
     private int prevPosCount = 20;
     public GameObject[] fingerJoints = new GameObject[5];
     private Quaternion original_rot;
+    public bool CanJump = true;
+    public float JumpTestDistance = .1f;
+    public float JumpStrength = 1f;
     void Start()
     {
 
@@ -94,6 +97,14 @@ public class HandController : MonoBehaviour
         /* playerModel.transform.position = Vector3.Lerp(playerModel.transform.position, playerModel.transform.position + direction, Time.deltaTime * lerpSpeed); */
         /* rigidbody.AddForce(direction * lerpSpeed, ForceMode.Force); */
         rigidbody.MovePosition(rigidbody.position + direction * lerpSpeed);
+
+        // JUMP
+        RaycastHit hit;
+        if (Input.GetKeyDown(KeyCode.Space) && Physics.Raycast(playerModel.transform.position, Vector3.down, out hit, JumpTestDistance))
+        {
+            print("can jump");
+            rigidbody.AddForce(Vector3.up * JumpStrength, ForceMode.Impulse);
+        }
 
         // PLAYERMODEL ROTATION
 

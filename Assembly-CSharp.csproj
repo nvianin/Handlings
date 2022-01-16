@@ -44,6 +44,7 @@
      <Compile Include="Assets\SampleSceneAssets\Scripts\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Net\RedisClient.cs" />
      <Compile Include="Assets\Scripts\Net\Client\UDPClient.cs" />
+     <Compile Include="Assets\Scripts\Entities\PhoneGate.cs" />
      <Compile Include="Assets\Scripts\PlayerController\HandController.cs" />
      <Compile Include="Assets\Scripts\Animation\LightPulser.cs" />
      <Compile Include="Assets\Settings\CustomRenderPassFeature.cs" />
@@ -52,6 +53,7 @@
      <Compile Include="Assets\Scripts\Animation\FingerWalk.cs" />
      <Compile Include="Assets\Scripts\PlayerController\Camera\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\PlayerController\Camera\CameraBoom.cs" />
+     <Compile Include="Assets\Scripts\Entities\NotifHand.cs" />
      <Compile Include="Assets\Scripts\Net\NetArgParser.cs" />
      <Compile Include="Assets\Scripts\Net\Server\Introspector.cs" />
      <Compile Include="Assets\Scripts\Utils\CustomThreadHandler.cs" />
@@ -74,7 +76,7 @@
      <Compile Include="Assets\Scripts\Net\Client\TCPClient.cs" />
      <Compile Include="Assets\Scripts\PlayerController\NoiseController.cs" />
      <Compile Include="Assets\Scripts\Net\Client\ClientController.cs" />
-     <Compile Include="Assets\Scripts\Entities\PhoneGate.cs" />
+     <Compile Include="Assets\Scripts\Entities\NotifButton.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />

@@ -316,6 +316,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  CanJump: 1
+  JumpTestDistance: 0.283
+  JumpStrength: 3
 --- !u!82 &4450879357391699018
 AudioSource:
   m_ObjectHideFlags: 0
